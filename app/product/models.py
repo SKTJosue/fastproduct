@@ -1,12 +1,25 @@
-from unittest.mock import Base
-from sqlalchemy import Column, DateTime, Float, Integer, String, func
-class Product(Base):
-    __tablename__ = "products"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    description = Column(String)
-    price = Column(Float)
-    stock = Column(Integer)
-    created_at = Column(DateTime, default=func.now())  # Se establece automáticamente al crear
-    updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
+
+from datetime import datetime
+from typing import Optional
+from sqlalchemy import DateTime, func, Column
+from sqlmodel import Field, SQLModel
+
+class Product(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str = Field(default=None)
+    price: float 
+    stock: int
+    description: str | None = Field(default=None)
+    category: str | None = Field(default=None)
+    image: str = Field(default=None)
+
+    created_at: Optional[datetime] = Field(
+        default=None,
+        sa_column=Column(
+            DateTime(timezone=True), server_default=func.now(), nullable=True
+        ),
+    )
+    updated_at: Optional[datetime] = Field(
+        default=None,
+        sa_column=Column(DateTime(timezone=True), onupdate=func.now(), nullable=True),
+    )
