@@ -3,8 +3,6 @@ from sqlmodel import select
 from sqlalchemy.orm import selectinload
 from app.db import SessionDep
 from app.products.models import Product
-from app.products_category.models import ProductCategory
-from app.products_brand.models import ProductBrand
 from app.products.schemas import ProductCreate, ProductUpdate
 
 class ProductService:
