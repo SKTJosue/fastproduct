@@ -11,7 +11,8 @@ https://fastapi.tiangolo.com/tutorial/sql-databases/#run-the-app
 engine = create_engine(Config.DATABASE_URL, echo = False)
 
 def create_db_and_tables(app: FastAPI):
-    SQLModel.metadata.drop_all(engine)
+    #SQLModel.metadata.drop_all(engine)
+
     SQLModel.metadata.create_all(engine)
     #print(f"--[>] Server is starting ...")
     yield
